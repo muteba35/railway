@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
         $table->id();
     $table->string('nom');
     $table->string('postnom')->nullable();
     $table->string('email')->unique();
+    $table->string('phone')->nullable();
 
 
     $table->timestamp('email_verified_at')->nullable(); // <-- ligne ajoutée pour éviter ton erreur
