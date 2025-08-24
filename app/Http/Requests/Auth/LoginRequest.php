@@ -94,8 +94,9 @@ class LoginRequest extends FormRequest
 
     private function getFragmentFromFirebase($userId): ?string
     {
+       $credentials = json_decode(env('FIREBASE_CREDENTIALS'), true);
         $factory = (new Factory())
-            ->withServiceAccount(env('FIREBASE_CREDENTIALS'))
+            ->withServiceAccount($credentials)
             ->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
 
         $database = $factory->createDatabase();
