@@ -799,15 +799,13 @@ $storagePath = storage_path("app/Identifiants_services/");
 
     public function storeInFirebase($userId, $fragment3, $service, $identifiantId): void
     {
-        $credentials = json_decode(env('FIREBASE_CREDENTIALS'), true);
-        $factory = (new Factory)->withServiceAccount($credentials)->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
+        $factory = (new Factory)->withServiceAccount(env('FIREBASE_CREDENTIALS'))->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
         $factory->createDatabase()->getReference("Identifiants_services/{$service}/{$userId}/{$identifiantId}")->set(['fragment3' => $fragment3]);
     }
 
     public function getFragmentFromFirebase($userId, $service, $identifiantId)
     {
-        $credentials = json_decode(env('FIREBASE_CREDENTIALS'), true);
-        $factory = (new Factory)->withServiceAccount($credentials)->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
+        $factory = (new Factory)->withServiceAccount(env('FIREBASE_CREDENTIALS'))->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
 
 $snapshot = $factory->createDatabase()->getReference("Identifiants_services/{$service}/{$userId}/{$identifiantId}")->getSnapshot();
 return $snapshot->exists() ? ($snapshot->getValue()['fragment3'] ?? null) : null;

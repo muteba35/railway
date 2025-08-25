@@ -113,8 +113,7 @@ class RegisteredUserController extends Controller
      */
     protected function storeInFirebase($userId, $fragment3): void
     {
-        $credentials = json_decode(env('FIREBASE_CREDENTIALS'), true);
-        $factory = (new Factory)->withServiceAccount($credentials)
+        $factory = (new Factory)->withServiceAccount(env('FIREBASE_CREDENTIALS'))
                                 ->withDatabaseUri(env( 'FIREBASE_DATABASE_URL'));
 
         $database = $factory->createDatabase();
